@@ -25,7 +25,7 @@ L.control
     "BasemapAT Orthofoto": L.tileLayer.provider("BasemapAT.orthofoto"),
     "BasemapAT Beschriftung": L.tileLayer.provider("BasemapAT.overlay"),
     "NASAGIBS Earth at night": L.tileLayer.provider("NASAGIBS.ViirsEarthAtNight2012"),
-    "OEPNV Wien": L.tileLayer.provider("OPNVKarte"),
+    "ÖPNV Österreich": L.tileLayer.provider("OPNVKarte"),
   })
   .addTo(map);
 
@@ -40,4 +40,9 @@ L.control
   .scale({
     imperial: false,
   })
+  .addTo(map);
+
+//Vollbild
+L.control
+  .fullscreen()
   .addTo(map);
