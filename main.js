@@ -117,8 +117,6 @@ async function loadLines(url) {
       <i class="fa-solid fa-down-long"></i> <br>
       <i class="fa-solid fa-circle-stop"></i>
       ${feature.properties.TO_NAME}
-      
-
         `);
     }
   }).addTo(themaLayer.lines);
@@ -178,10 +176,14 @@ async function loadHotels(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
-<h3>${feature.properties.BETRIEB}<h3>
-
-
-
+<h3>${feature.properties.BETRIEB} </h3>
+<h3><p>${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT}</p></h3>
+<hr>
+<p>Addr.: ${feature.properties.ADRESSE} <br>
+<a href="tel:${feature.properties.KONTAKT_TEL}">Tel.: ${feature.properties.KONTAKT_TEL}</a> <br>
+<a href="mailto:${feature.properties.KONTAKT_EMAIL}">${feature.properties.KONTAKT_EMAIL}</a> <br>
+<a href="${feature.properties.WEBLINK1}"target="hotel">Homepage</a>
+</p>
         `);
     }
   }).addTo(themaLayer.hotels);
