@@ -38,8 +38,8 @@ L.control
     "Sehenswürdigkeiten": themaLayer.sights,
     "Vienna Sightseeing Linien": themaLayer.lines,
     "Vienna Sightseeing Stops": themaLayer.stops,
-    "Vienna Fußgängerzonen": themaLayer.zones,
-    "Vienna Hotels": themaLayer.hotels,
+    "Fußgängerzonen": themaLayer.zones,
+    "Hotels und Unterkünfte": themaLayer.hotels,
 
   })
   .addTo(map);
