@@ -108,6 +108,17 @@ async function loadLines(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
+    
+     <p> <i class="fa-solid fa-bus"></i>
+      <strong>${feature.properties.LINE_NAME}</strong> </p>
+      
+      <i class="fa-solid fa-circle-stop"></i> 
+      ${feature.properties.FROM_NAME} <br>
+      <i class="fa-solid fa-down-long"></i> <br>
+      <i class="fa-solid fa-circle-stop"></i>
+      ${feature.properties.TO_NAME}
+      
+
         `);
     }
   }).addTo(themaLayer.lines);
@@ -124,6 +135,10 @@ async function loadStops(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
+      <p> <i class="fa-solid fa-bus"></i>
+      <strong>${feature.properties.LINE_NAME}</strong> </p>
+      ${feature.properties.STAT_ID}
+      ${feature.properties.STAT_NAME}
         `);
     }
   }).addTo(themaLayer.stops);
@@ -140,6 +155,12 @@ async function loadZones(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
+      <p><strong>Fußgängerzone ${feature.properties.ADRESSE} </strong></p>
+      <i class="fa-regular fa-clock"></i>
+      ${feature.properties.ZEITRAUM}
+      <p><i class="fa-solid fa-circle-info"></i> 
+      ${feature.properties.AUSN_TEXT}
+      </p>
         `);
     }
   }).addTo(themaLayer.zones);
@@ -157,6 +178,10 @@ async function loadHotels(url) {
       console.log(feature);
       console.log(feature.properties.NAME);
       layer.bindPopup(`
+<h3>${feature.properties.BETRIEB}<h3>
+
+
+
         `);
     }
   }).addTo(themaLayer.hotels);
