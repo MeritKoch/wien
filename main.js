@@ -1,12 +1,5 @@
 /* Vienna Sightseeing Beispiel */
 
-// Stephansdom Objekt
-let stephansdom = {
-  lat: 48.208493,
-  lng: 16.373118,
-  title: "Stephansdom",
-};
-
 // Karte initialisieren
 let map = L.map("map").setView([stephansdom.lat, stephansdom.lng], 12);
 
@@ -16,6 +9,7 @@ startLayer.addTo(map);
 
 let themaLayer = {
   sights: L.featureGroup().addTo(map),
+  lines: L.featureGroup().addTo(map),
 
 }
 // Hintergrundlayer
@@ -32,6 +26,7 @@ L.control
     "ÖPNV Österreich": L.tileLayer.provider("OPNVKarte"),
   }, {
     "Sehenswürdigkeiten": themaLayer.sights,
+    "Vienna Sightseeing Linien": themaLayer.lines,
   })
   .addTo(map);
 
@@ -53,17 +48,11 @@ L.control
   .fullscreen()
   .addTo(map);
 
-// function addiere(zahl1, zahl2) {
-//let summe = zahl1 + zahl2;
-//console.log("Summe: ", summe);
-// }
-// addiere(4, 7);
-
 async function loadSights(url) {
-  console.log("Loading", url);
+  // console.log("Loading", url);
   let response = await fetch(url)
   let geojson = await response.json();
-  console.log(geojson);
+  // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
       console.log(feature);
@@ -73,9 +62,52 @@ async function loadSights(url) {
         <h4><a href="${feature.properties.WEITERE_INF}"
         target="wien">${feature.properties.NAME}</a></h4>
         <address>${feature.properties.ADRESSE}</address>
-`);
+        `);
     }
-
   }).addTo(themaLayer.sights);
 }
 loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json")
+
+/*
+Suche "sightseeing"
+
+loadLines
+Touristische Kraftfahrlinien Liniennetz Vienna Sightseeing Linie Wien 
+lines 
+
+loadStops
+Touristische Kraftfahrlinien Haltestellen Vienna Sightseeing Linie Standorte Wien 
+stops
+
+Suche "Fußgängerzone"
+loadZones
+Fußgängerzonen Wien 
+zones
+
+Suche "Hotels"
+loadHotels
+Hotels und Unterkünfte Standorte Wien 
+hotels
+*/
+
+async function loadLines(url) {
+  // console.log("Loading", url);
+  let response = await fetch(url)
+  let geojson = await response.json();
+  // console.log(geojson);
+  L.geoJSON(geojson, {
+    onEachFeature: function (feature, layer) {
+      console.log(feature);
+      console.log(feature.properties.NAME);
+      layer.bindPopup(`
+  
+        `);
+    }
+  }).addTo(themaLayer.lines);
+}
+loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json")
+
+
+
+
+
