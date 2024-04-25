@@ -120,9 +120,7 @@ async function loadLines(url) {
         lineColor = "#AAAAAA";
       } else if (lineName == "Orange Line") {
         lineColor = "#FF851B";
-      }
-
-      return {
+      } return {
         color: lineColor,
       };
     },
