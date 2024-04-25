@@ -17,9 +17,9 @@ startLayer.addTo(map);
 let themaLayer = {
   sights: L.featureGroup(),
   lines: L.featureGroup(),
-  stops: L.featureGroup().addTo(map),
+  stops: L.featureGroup(),
   zones: L.featureGroup(),
-  hotels: L.featureGroup(),
+  hotels: L.featureGroup().addTo(map),
 
 }
 // Hintergrundlayer
@@ -114,7 +114,7 @@ async function loadLines(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     style: function (feature) {
-      console.log("XXXX", feature.properties.LINE_NAME);
+      // console.log("XXXX", feature.properties.LINE_NAME);
       let lineName = feature.properties.LINE_NAME;
       let lineColor = "black";
       if (lineName == "Red Line") {
@@ -170,7 +170,7 @@ async function loadStops(url) {
   let geojson = await response.json();
   L.geoJSON(geojson, {
     pointToLayer: function (feature, latlng) {
-      console.log(feature);
+      //console.log(feature);
       return L.marker(latlng, {
         icon: L.icon({
           iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
@@ -230,6 +230,37 @@ async function loadHotels(url) {
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
+    pointToLayer: function (feature, latlng) {
+      // console.log("Hotelstyle", feature.properties);
+      let hotelKat = feature.properties.KATEGORIE_TXT;
+      let hotelIcon;
+      // console.log(hotelKat)
+      if (hotelKat == "nicht kategorisiert") {
+        hotelIcon = "hotel_0star";
+      } else if (hotelKat == "1*") {
+        hotelIcon = "hotel_1star";
+      } else if (hotelKat == "2*") {
+        hotelIcon = "hotel_2stars";
+      } else if (hotelKat == "3*") {
+        hotelIcon = "hotel_3stars";
+      } else if (hotelKat == "4*") {
+        hotelIcon = "hotel_5stars";
+      } else if (hotelKat == "5*") {
+        hotelIcon = "hotel_5stars";
+
+      } else {
+        hotelIcon = "hotel_0star"
+        //vielleicht kommen noch andere Sterne dazu hinzu...
+      }
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: `icons/${hotelIcon}.png`,
+          iconAnchor: [16, 37],
+          popupAnchor: [0, -37]
+        })
+      });
+    },
+
     onEachFeature: function (feature, layer) {
       // console.log(feature);
       // console.log(feature.properties.NAME);
