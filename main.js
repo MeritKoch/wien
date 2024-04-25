@@ -15,10 +15,10 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup(),
-  lines: L.featureGroup().addTo(map),
+  sights: L.featureGroup().addTo(map),
+  lines: L.featureGroup(),
   stops: L.featureGroup(),
-  zones: L.featureGroup().addTo(map),
+  zones: L.featureGroup(),
   hotels: L.featureGroup(),
 
 }
@@ -121,7 +121,10 @@ async function loadLines(url) {
       } else if (lineName == "Orange Line") {
         lineColor = "#FF851B";
 
-      } return {
+      } else {
+        //vielleicht kommen noch andere Linien hinzu...
+      }
+      return {
         color: lineColor,
       };
     },
