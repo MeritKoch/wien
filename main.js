@@ -17,7 +17,7 @@ startLayer.addTo(map);
 let themaLayer = {
   sights: L.featureGroup().addTo(map),
   lines: L.featureGroup(),
-  stops: L.featureGroup(),
+  stops: L.featureGroup().addTo(map),
   zones: L.featureGroup(),
   hotels: L.featureGroup(),
 
@@ -156,12 +156,30 @@ async function loadLines(url) {
 }
 loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
 
+/*
+bus_1.png // FF4136 Red
+bus_2.png // FFDC00 Yellow
+bus_3.png // 0074D9 Blue
+bus_4.png // 2RCC40 Green
+bus_5.png // AAAAAA Grey
+bus_6.png // FF851B Orange
+*/
 async function loadStops(url) {
   // console.log("Loading", url);
   let response = await fetch(url)
   let geojson = await response.json();
-  // console.log(geojson);
+  console.log(feature);
   L.geoJSON(geojson, {
+
+    pointToLayer: function (feature, latlng) {
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: "icons/bus_1.png",
+          iconAnchor: [16, 37],
+          popupAnchor: [0, -37]
+        })
+      });
+    },
     onEachFeature: function (feature, layer) {
       //console.log(feature);
       //console.log(feature.properties.NAME);
