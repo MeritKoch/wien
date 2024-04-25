@@ -155,9 +155,9 @@ async function loadZones(url) {
       layer.bindPopup(`
       <p><strong>Fußgängerzone ${feature.properties.ADRESSE} </strong></p>
       <i class="fa-regular fa-clock"></i>
-      ${feature.properties.ZEITRAUM}
+      ${feature.properties.ZEITRAUM || "dauerhaft"}
       <p><i class="fa-solid fa-circle-info"></i> 
-      ${feature.properties.AUSN_TEXT}
+      ${feature.properties.AUSN_TEXT || "ohne Ausnahmen"}
       </p>
         `);
     }
