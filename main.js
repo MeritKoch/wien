@@ -19,7 +19,9 @@ let themaLayer = {
   lines: L.featureGroup(),
   stops: L.featureGroup(),
   zones: L.featureGroup(),
-  hotels: L.featureGroup().addTo(map),
+  hotels: L.markerClusterGroup({
+    disableClusteringAtZoom: 17
+  }).addTo(map),
 
 }
 // Hintergrundlayer
@@ -244,7 +246,7 @@ async function loadHotels(url) {
       } else if (hotelKat == "3*") {
         hotelIcon = "hotel_3stars";
       } else if (hotelKat == "4*") {
-        hotelIcon = "hotel_5stars";
+        hotelIcon = "hotel_4stars";
       } else if (hotelKat == "5*") {
         hotelIcon = "hotel_5stars";
 
