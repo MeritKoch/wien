@@ -63,8 +63,8 @@ async function loadSights(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      // console.log(feature);
+      // console.log(feature.properties.NAME);
       layer.bindPopup(`
         <img src="${feature.properties.THUMBNAIL}" alt="*">
         <h4><a href="${feature.properties.WEITERE_INF}"
@@ -105,7 +105,7 @@ async function loadLines(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     style: function (feature) {
-      console.log(feature.properties.LINE_NAME);
+      console.log("XXXX", feature.properties.LINE_NAME);
       let lineName = feature.properties.LINE_NAME;
       let lineColor = "black";
       if (lineName == "Red Line") {
@@ -120,13 +120,14 @@ async function loadLines(url) {
         lineColor = "#AAAAAA";
       } else if (lineName == "Orange Line") {
         lineColor = "#FF851B";
+
       } return {
         color: lineColor,
       };
     },
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
     
      <p> <i class="fa-solid fa-bus"></i>
@@ -150,8 +151,8 @@ async function loadStops(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      //console.log(feature);
+      //console.log(feature.properties.NAME);
       layer.bindPopup(`
       <p> <i class="fa-solid fa-bus"></i>
       <strong>${feature.properties.LINE_NAME}</strong> </p>
@@ -178,8 +179,8 @@ async function loadZones(url) {
       };
     },
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      // console.log(feature);
+      // console.log(feature.properties.NAME);
       layer.bindPopup(`
       <p><strong>Fußgängerzone ${feature.properties.ADRESSE} </strong></p>
       <i class="fa-regular fa-clock"></i>
@@ -201,8 +202,8 @@ async function loadHotels(url) {
   // console.log(geojson);
   L.geoJSON(geojson, {
     onEachFeature: function (feature, layer) {
-      console.log(feature);
-      console.log(feature.properties.NAME);
+      // console.log(feature);
+      // console.log(feature.properties.NAME);
       layer.bindPopup(`
 <h3>${feature.properties.BETRIEB} </h3>
 <h3><p>${feature.properties.BETRIEBSART_TXT} ${feature.properties.KATEGORIE_TXT}</p></h3>
