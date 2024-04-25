@@ -16,7 +16,7 @@ startLayer.addTo(map);
 
 let themaLayer = {
   sights: L.featureGroup(),
-  lines: L.featureGroup(),
+  lines: L.featureGroup().addTo(map),
   stops: L.featureGroup(),
   zones: L.featureGroup().addTo(map),
   hotels: L.featureGroup(),
@@ -104,6 +104,28 @@ async function loadLines(url) {
   let geojson = await response.json();
   // console.log(geojson);
   L.geoJSON(geojson, {
+    style: function (feature) {
+      console.log(feature.properties.LINE_NAME);
+      let lineName = feature.properties.LINE_NAME;
+      let lineColor = "black";
+      if (lineName == "Red Line") {
+        lineColor = "#FF4136";
+      } else if (lineName == "Yellow Line") {
+        lineColor = "#FFDC00";
+      } else if (lineName == "Blue Line") {
+        lineColor = "#0074D9";
+      } else if (lineName == "Green Line") {
+        lineColor = "#2ECC40 ";
+      } else if (lineName == "Grey Line") {
+        lineColor = "#AAAAAA";
+      } else if (lineName == "Orange Line") {
+        lineColor = "#FF851B";
+      }
+
+      return {
+        color: lineColor,
+      };
+    },
     onEachFeature: function (feature, layer) {
       console.log(feature);
       console.log(feature.properties.NAME);
@@ -156,7 +178,6 @@ async function loadZones(url) {
         opacity: 0.4,
         fillOpacity: 0.1,
       };
-
     },
     onEachFeature: function (feature, layer) {
       console.log(feature);
