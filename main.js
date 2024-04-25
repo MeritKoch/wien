@@ -15,7 +15,7 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau");
 startLayer.addTo(map);
 
 let themaLayer = {
-  sights: L.featureGroup().addTo(map),
+  sights: L.featureGroup(),
   lines: L.featureGroup(),
   stops: L.featureGroup().addTo(map),
   zones: L.featureGroup(),
@@ -168,13 +168,12 @@ async function loadStops(url) {
   // console.log("Loading", url);
   let response = await fetch(url)
   let geojson = await response.json();
-  console.log(feature);
   L.geoJSON(geojson, {
-
     pointToLayer: function (feature, latlng) {
+      console.log(feature);
       return L.marker(latlng, {
         icon: L.icon({
-          iconUrl: "icons/bus_1.png",
+          iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
           iconAnchor: [16, 37],
           popupAnchor: [0, -37]
         })
